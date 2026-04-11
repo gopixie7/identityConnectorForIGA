@@ -1,0 +1,18 @@
+# -----------------------------------------------------------------------
+# SCIM 2.0 Connector Specification
+# -----------------------------------------------------------------------
+connector_type: scim
+name: My SCIM Application
+
+connection:
+  base_url: "https://scim.example.com/scim/v2"
+  timeout: 30
+  verify_ssl: true
+
+auth:
+  auth_type: oauth2
+  params:
+    token_url: "https://scim.example.com/oauth/token"
+    client_id: "${SCIM_CLIENT_ID}"
+    client_secret: "${SCIM_CLIENT_SECRET}"
+    scope: "scim"

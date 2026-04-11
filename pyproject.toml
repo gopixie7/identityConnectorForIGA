@@ -1,0 +1,59 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "iga-connector-sdk"
+version = "1.0.0"
+description = "Low-code SDK connector template for Identity Governance & Administration platforms"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+keywords = ["iga", "identity", "governance", "connector", "provisioning", "sdk"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Topic :: Security",
+    "Topic :: System :: Systems Administration",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "httpx>=0.27,<1",
+    "pydantic>=2.5,<3",
+    "pyyaml>=6.0,<7",
+]
+
+[project.optional-dependencies]
+ldap = ["python-ldap>=3.4,<4; sys_platform != 'win32'"]
+database = ["sqlalchemy>=2.0,<3"]
+all = ["sqlalchemy>=2.0,<3", "python-ldap>=3.4,<4; sys_platform != 'win32'"]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+    "pytest-cov>=4.0",
+    "ruff>=0.3",
+    "mypy>=1.8",
+]
+
+[project.scripts]
+iga-connector = "iga_connector.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP"]
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"

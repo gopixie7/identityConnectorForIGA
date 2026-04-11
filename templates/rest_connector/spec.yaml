@@ -1,0 +1,46 @@
+# -----------------------------------------------------------------------
+# REST Connector Specification
+# Copy this file and customise it for your target system.
+# -----------------------------------------------------------------------
+connector_type: rest
+name: My REST Application
+
+connection:
+  base_url: "https://api.example.com/v1"
+  timeout: 30
+  verify_ssl: true
+
+auth:
+  auth_type: oauth2            # basic | oauth2 | api_key
+  params:
+    token_url: "https://api.example.com/oauth/token"
+    client_id: "${CLIENT_ID}"
+    client_secret: "${CLIENT_SECRET}"
+    scope: "users.read users.write groups.read groups.write"
+
+options:
+  health_path: "/health"
+
+  account_endpoint:
+    list_path: "/users"
+    get_path: "/users/{identity}"
+    create_path: "/users"
+    update_path: "/users/{identity}"
+    delete_path: "/users/{identity}"
+    identity_field: "id"
+    display_name_field: "displayName"
+    status_field: "status"
+    list_results_key: "results"
+    list_total_key: "totalCount"
+    page_param: "page"
+    page_size_param: "limit"
+
+  entitlement_endpoint:
+    list_path: "/groups"
+    get_path: "/groups/{identity}"
+    grant_path: "/groups/{entitlement_id}/members"
+    revoke_path: "/groups/{entitlement_id}/members/{account_id}"
+    identity_field: "id"
+    name_field: "name"
+    description_field: "description"
+    list_results_key: "results"

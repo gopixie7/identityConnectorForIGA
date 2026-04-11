@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "IGA Connector Specification",
+  "description": "JSON schema for defining an IGA connector's target system specification",
+  "type": "object",
+  "required": ["connector_type", "connection"],
+  "properties": {
+    "connector_type": {
+      "type": "string",
+      "description": "Registered connector type: rest, scim, database, ldap"
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable name for this connector instance"
+    },
+    "connection": {
+      "type": "object",
+      "required": ["base_url"],
+      "properties": {
+        "base_url": {
+          "type": "string",
+          "description": "Base URL of the target system API"
+        },
+        "timeout": {
+          "type": "number",
+          "default": 30
+        },
+        "verify_ssl": {
+          "type": "boolean",
+          "default": true
+        }
+      }
+    },
+    "auth": {
+      "type": "object",
+      "required": ["auth_type"],
+      "properties": {
+        "auth_type": {
+          "type": "string",
+          "enum": ["basic", "oauth2", "api_key"],
+          "description": "Authentication strategy"
+        },
+        "params": {
+          "type": "object",
+          "description": "Strategy-specific parameters (username/password, client_id/secret, api_key, etc.)"
+        }
+      }
+    },
+    "schema_overrides": {
+      "type": "object",
+      "description": "Override default schema (attribute mappings, custom fields, etc.)"
+    },
+    "options": {
+      "type": "object",
+      "properties": {
+        "account_endpoint": {
+          "type": "object",
+          "description": "Account handler endpoint specification"
+        },
+        "entitlement_endpoint": {
+          "type": "object",
+          "description": "Entitlement handler endpoint specification"
+        }
+      }
+    }
+  }
+}

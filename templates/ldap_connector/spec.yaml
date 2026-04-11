@@ -1,0 +1,21 @@
+# -----------------------------------------------------------------------
+# LDAP / Active Directory Connector Specification
+# -----------------------------------------------------------------------
+connector_type: ldap
+name: My LDAP Directory
+
+connection:
+  ldap_url: "ldaps://ldap.example.com:636"
+  bind_dn: "cn=admin,dc=example,dc=com"
+  bind_password: "${LDAP_BIND_PASSWORD}"
+  use_ssl: true
+
+options:
+  users_base_dn: "ou=users,dc=example,dc=com"
+  groups_base_dn: "ou=groups,dc=example,dc=com"
+  user_object_class: inetOrgPerson
+  group_object_class: groupOfNames
+  user_id_attr: uid
+  user_display_attr: cn
+  group_id_attr: cn
+  member_attr: member

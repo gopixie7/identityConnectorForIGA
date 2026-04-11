@@ -1,0 +1,21 @@
+# -----------------------------------------------------------------------
+# Database Connector Specification
+# -----------------------------------------------------------------------
+connector_type: database
+name: My Database Application
+
+connection:
+  # Async SQLAlchemy connection string
+  # PostgreSQL: postgresql+asyncpg://user:pass@host:5432/db
+  # MySQL:      mysql+aiomysql://user:pass@host:3306/db
+  # SQLite:     sqlite+aiosqlite:///path/to/db.sqlite3
+  connection_string: "${DB_CONNECTION_STRING}"
+
+options:
+  accounts_table: users
+  entitlements_table: roles
+  membership_table: user_roles
+  identity_column: id
+  username_column: username
+  display_name_column: display_name
+  status_column: status
