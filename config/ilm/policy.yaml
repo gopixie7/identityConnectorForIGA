@@ -1,0 +1,9 @@
+# IGA platform policy configuration for the application above.
+joiner_workflow_enabled: true
+mover_workflow_enabled: true
+leaver_workflow_enabled: true
+access_request_enabled: true
+certification_cadence: quarterly
+entitlement_granularity: role
+sod_ruleset_in_scope: true
+password_management_in_scope: false

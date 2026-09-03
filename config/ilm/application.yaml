@@ -1,0 +1,18 @@
+# APM application record — the authoritative input to governance-driven discovery.
+application_id: APP-014
+name: Loan Origination Platform
+stage: production
+risk_classification: critical
+data_sensitivity: restricted
+regulatory_scope: [sox, pci_dss]
+identity_population: workforce
+application_owner: lending.platform@example.com
+hosting_model: saas
+
+authorization_model: local_user_store
+has_local_user_store: true
+has_api_or_sdk: true
+ootb_connector_available: false
+vendor_restriction: false
+integration_cost_prohibitive: false
+in_governance_scope: true

@@ -39,6 +39,7 @@ dev = [
 
 [project.scripts]
 iga-connector = "iga_connector.cli:main"
+iga-ilm = "iga_connector.ilm.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

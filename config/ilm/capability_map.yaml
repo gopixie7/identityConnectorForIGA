@@ -1,0 +1,57 @@
+# Connector capability specification — the governance contract between this
+# integration and the IGA platform's policy and certification functions.
+integration_id: app-014-integration
+application_id: APP-014
+connector_name: loan_origination_rest
+connector_version: 1.2.0
+path: custom_connector
+fulfillment_channel: automated_connector
+
+ownership:
+  governance_owner: identity.governance@example.com
+  technical_maintainer: iam.engineering@example.com
+  application_owner: lending.platform@example.com
+
+declarations:
+  - operation: identity_aggregation
+    supported: full
+    coverage_scope: All account types
+    governance_dependencies: [Certification campaigns, SoD evaluation]
+
+  - operation: account_provisioning
+    supported: full
+    coverage_scope: Standard attributes
+    governance_dependencies: [Joiner workflow, Access request]
+
+  - operation: account_deprovisioning
+    supported: full
+    coverage_scope: Immediate disable + 30-day delete
+    governance_dependencies: [Leaver workflow, Termination trigger]
+
+  - operation: entitlement_enumeration
+    supported: partial
+    coverage_scope: Roles only; fine-grained permissions excluded
+    governance_dependencies: [Access certification]
+    gap_control: Manual entitlement supplement for permissions, reviewed quarterly
+
+  - operation: entitlement_assignment
+    supported: full
+    coverage_scope: Roles only
+    governance_dependencies: [Role-based access request]
+    gap_control: Permissions granted via manual fulfillment channel
+
+  - operation: entitlement_revocation
+    supported: full
+    coverage_scope: Roles only
+    governance_dependencies: [Mover workflow, Certification revocation]
+
+  - operation: certification_feed
+    supported: full
+    coverage_scope: Roles and accounts
+    governance_dependencies: [Quarterly certification campaign]
+
+  - operation: nhi_credential_rotation
+    supported: none
+    coverage_scope: N/A
+    governance_dependencies: [NHI credential lifecycle policy]
+    gap_control: Secrets manager integration required as compensating control
